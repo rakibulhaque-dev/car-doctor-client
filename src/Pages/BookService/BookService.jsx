@@ -61,7 +61,7 @@ const BookService = () => {
                         <label className="label">
                             <span className="label-text">Date</span>
                         </label>
-                        <input type="date" defaultValue={user?.displayName}v name='date' className="input input-bordered" />
+                        <input type="date" defaultValue={user?.displayName} name='date' className="input input-bordered" />
                     </div>
                     <div className="form-control">
                         <label className="label">
@@ -80,10 +80,6 @@ const BookService = () => {
                     <input value="Order Confirm" type='submit' className="btn btn-block" />
                 </div>
             </form>
-
-            <div className="card-body">
-
-            </div>
         </div>
 
     );
