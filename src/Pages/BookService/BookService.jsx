@@ -3,7 +3,8 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const BookService = () => {
-    const service = useLoaderData()
+    const service = useLoaderData({})
+    console.log(service)
     const { title, price, _id, img } = service;
     const { user } = useContext(AuthContext)
 
@@ -20,7 +21,7 @@ const BookService = () => {
             img,
             email,
             date,
-            service: _id,
+            service: title,
             price: price
         }
         console.log(booking);
@@ -46,7 +47,7 @@ const BookService = () => {
 
     return (
         <div>
-            <h2 className='text-3xl text-center'>Checkout: {title}</h2>
+            <h2 className='text-3xl text-center text-orange-600'> {title}</h2>
 
             <form onSubmit={handleBookService}>
                 <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
