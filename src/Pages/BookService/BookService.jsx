@@ -1,21 +1,24 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const BookService = () => {
     const service = useLoaderData({})
-    console.log(service)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = '/bookings';
+
     const { title, price, _id, img } = service;
     const { user } = useContext(AuthContext)
 
 
     const handleBookService = event => {
         event.preventDefault();
-
         const form = event.target;
         const name = form.name.value;
         const date = form.date.value;
         const email = form.email.value;
+        const price = form.price.value;
         const booking = {
             customerName: name,
             img,
@@ -24,7 +27,6 @@ const BookService = () => {
             service: title,
             price: price
         }
-        console.log(booking);
 
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
@@ -34,14 +36,15 @@ const BookService = () => {
             body: JSON.stringify(booking)
 
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.insertedId){
-                alert('Service bookmarked!')
-            }
-        })
-        
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    alert('Service bookmarked!')
+                    navigate(from, { replace: true })
+                }
+            })
+
     }
 
 
@@ -73,7 +76,7 @@ const BookService = () => {
                         <label className="label">
                             <span className="label-text">Due Amount</span>
                         </label>
-                        <input type="text" defaultValue={'$ ' + price} className="input input-bordered" />
+                        <input type="text" name='price' defaultValue={'$ ' + price} className="input input-bordered" />
                     </div>
                 </div>
                 <div className="mt-6 form-control">

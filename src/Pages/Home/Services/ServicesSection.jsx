@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ServiceCard from './ServiceCard';
 
-const Services = () => {
+const ServicesSection = () => {
     const [services, setServices] = useState([])
 
     useEffect(()=>{
@@ -30,4 +30,4 @@ const Services = () => {
     );
 };
 
-export default Services;
+export default ServicesSection;

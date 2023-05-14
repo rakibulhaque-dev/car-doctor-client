@@ -5,7 +5,7 @@ import BookingRow from './BookingRow';
 const Bookings = () => {
     const { user } = useContext(AuthContext)
     const [bookings, setBookings] = useState([])
-    console.log(bookings)
+    
     const url = `http://localhost:5000/bookings?email=${user?.email}`
     useEffect(() => {
         fetch(url)
@@ -33,7 +33,9 @@ const Bookings = () => {
 
     // handle confirm
     const handleConfirm = (id) => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+   
+        const url = `http://localhost:5000/bookings/${id}`
+        fetch(url, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -43,7 +45,7 @@ const Bookings = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (data.modifiedCount > 0) {
+                if (data.modifiedCount) {
                     console.log('Done')
                 }
             })
