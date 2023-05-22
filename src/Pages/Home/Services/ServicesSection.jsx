@@ -17,7 +17,7 @@ const ServicesSection = () => {
                 <h2 className='text-5xl'>Our Service Area</h2>
                 <p>The majority have suffered alteration in some form, by injected humour, or randomised <br /> words which don't look even slightly believable. </p>
             </div>
-
+            
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                 {
                     services.map(service => <ServiceCard

@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext)
     const location = useLocation();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
     console.log(from)
 
@@ -19,28 +20,10 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                const loggedUser = {
-                    email: user.email
-                }
-                console.log(loggedUser)
-
-                fetch('http://localhost:5000/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(loggedUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        localStorage.setItem('car-access-token', data.token)
-                        navigate(from, { replace: true })
-
-                    })
-
+                navigate(from, { replace: true })
+                console.log(user)
             })
-            .catch(error => console.log(error))
+            .catch(error => console.log(error))  
     }
 
     return (
@@ -74,6 +57,7 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='my-4 text-center'>New to Car Doctors ? <Link className='font-bold text-orange-600' to='/signup'>Sign Up</Link></p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
